@@ -10,18 +10,19 @@
 <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
 <script>
-  // invert() creates object in which the values are keys and the attributes are values
-  var Todo = Backbone.Model.extend({
-    defaults: {
-      title: '',
-      completed: false
-    }
-  });
+  // chain()
+  var collection = new Backbone.Collection([
+    { name: 'Tim', age: 5 },
+    { name: 'Ida', age: 26 },
+    { name: 'Rob', age: 55 }
+  ]);
 
-  var todo = new Todo({title: 'go to Austria.'});
-  console.log(todo.invert());
+  var filteredNames = collection.chain() //start chain, returns wrapper around collection's models
+    .filter(function(item) { return item.get('age') > 10; }) // returns wrapped array excluding Tim
+    .map(function(item) { return item.get('name'); }) // returns wrapped array containing remaining names
+    .value(); // terminates the chain and returns the resulting array
 
-  // logs: {'go to Austria.': 'title', 'false': 'completed'}
+  console.log(filteredNames); // logs: ['Ida', 'Rob']
 
 </script>
 </body>
