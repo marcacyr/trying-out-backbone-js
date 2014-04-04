@@ -10,7 +10,7 @@
 <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
 <script>
-  // keys() and values() get lists of attribute names and values
+  // pairs() get list of attributes as [key,value] pairs
   var Todo = Backbone.Model.extend({
     defaults: {
       title: '',
@@ -19,11 +19,12 @@
   });
 
   var todo = new Todo({title: 'go to Austria.'});
-  console.log(todo.keys());
-  // logs ["title", "completed"]
+  var pairs = todo.pairs();
 
-  console.log(todo.values());
-  // logs: ["go to Austria.", false]
+  console.log(pairs[0]);
+  // logs: ["title", "go to Austria."]
+  console.log(pairs[1]);
+  // logs: ["completed", false]
 </script>
 </body>
 </html>
