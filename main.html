@@ -27,6 +27,22 @@
   // go to Belgium.
   // go to China.
   // go to Austria.
+
+  var sortedByAlphabet = todos.sortBy(function(todo) {
+    return todo.get("title").toLowerCase();
+  });
+
+  console.log("- Now sorted: ");
+
+  sortedByAlphabet.forEach(function(model) {
+    console.log(model.get('title'));
+  });
+
+  // Above logs:
+  // - Now sorted:
+  // go to Austria
+  // go to Belgium
+  // Go to China
 </script>
 </body>
 </html>
