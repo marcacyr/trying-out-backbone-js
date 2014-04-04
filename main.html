@@ -10,37 +10,19 @@
 <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
 <script>
-var people = new Backbone.Collection;
+  var todos = new Backbone.Collection();
 
-people.comparator = function(a,b) {
-  return a.get('name') < b.get('name') ? -1 : 1;
-};
+  todos.add([
+    { title: 'go to Belgium.', completed: false },
+    { title: 'go to China.', completed: false },
+    { title: 'go to Austria.', completed: true }
+  ]);
 
-var tom = new Backbone.Model({ name: 'Tom' });
-var rob = new Backbone.Model({ name: 'Rob' });
-var tim = new Backbone.Model({ name: 'Tim' });
-
-people.add(tom);
-people.add(rob);
-people.add(tim);
-
-console.log(people.indexOf(rob) === 0); // true
-console.log(people.indexOf(tim) === 1); //true
-console.log(people.indexOf(tom) === 2); //true
-
-people.any(function(model) {
-  return model.id === 100;
-});
-
-// or
-people.some(function(model) {
-  return model.id === 100;
-});
-
-console.log(people.size());
-
-// equivalent to 
-console.log(people.length);
+  // create groups of completed and incomplete models
+  var byCompleted = todos.groupBy('completed');
+  var completed = new Backbone.Collection(byCompleted[true]);
+  console.log(completed.pluck('title'));
+  // logs: ["go to Austria."]
 </script>
 </body>
 </html>
