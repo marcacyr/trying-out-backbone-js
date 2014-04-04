@@ -18,15 +18,15 @@
     { title: 'go to Austria.', completed: true }
   ]);
 
-  var count = 1;
-  console.log(todos.map(function(model) {
-    return count++ + ". " + model.get('title');
-  }));
+  todos.max(function(model) {
+    return model.id;
+  }).id;
 
-  // Above logs:
-  // 1. go to Belgium
-  // 2. go to China
-  // 3. go to Austria
+  todos.min(function(model) {
+    return model.id;
+  }).id;
+
+  var captions = todos.pluck('caption');
 </script>
 </body>
 </html>
