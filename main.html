@@ -27,6 +27,20 @@ people.add(tim);
 console.log(people.indexOf(rob) === 0); // true
 console.log(people.indexOf(tim) === 1); //true
 console.log(people.indexOf(tom) === 2); //true
+
+people.any(function(model) {
+  return model.id === 100;
+});
+
+// or
+people.some(function(model) {
+  return model.id === 100;
+});
+
+console.log(people.size());
+
+// equivalent to 
+console.log(people.length);
 </script>
 </body>
 </html>
