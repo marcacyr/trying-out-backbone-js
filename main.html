@@ -10,33 +10,37 @@
 <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
 <script>
-  // Your code goes here
-  // Define an object with two counters
-  var TodoCounter = { counterA: 0, counterB: 0 };
-  // Mix in Backbone events
-  _.extend(TodoCounter, Backbone.Events);
+  var TodosCollection = new Backbone.Collection();
 
-  // Increment counterA, triggering an event
-  var incrA = function() {
-    TodoCounter.counterA += 1;
-    TodoCounter.trigger('event');
-  };
+  TodosCollection.add([
+    { id: 1, title: 'go to Jamaica.', completed: false },
+    { id: 2, title: 'go to China.', completed: false },
+    { id: 3, title: 'go to Disneyland.', completed: true }
+  ]);
 
-  // Increment counterB
-  var incrB = function() {
-    TodoCounter.counterB += 1;
-  }
+  // we can listen for add/change/remove events
+  TodosCollection.on("add", function(model) {
+    console.log("Added " + model.get('title'));
+  });
 
-  // Use once rather than having to explicitly unbind event listener
-  TodoCounter.once('event', incrA);
-  TodoCounter.once('event', incrB);
+  TodosCollection.on("remove", function(model) {
+    console.log("Removed " + model.get('title'));
+  });
 
-  // Trigger the event once again
-  TodoCounter.trigger('event');
+  TodosCollection.on("change:completed", function(model) {
+    console.log("Completed " + model.get('title'));
+  });
 
-  // Check output
-  console.log(TodoCounter.counterA === 1); // true
-  console.log(TodoCounter.counterB === 1); // true
+  TodosCollection.set([
+    { id: 1, title: 'go to Jamaica.', completed: true },
+    { id: 2, title: 'go to China.', completed: false },
+    { id: 4, title: 'go to Disney World.', completed: false}
+  ]);
+
+  // Above logs:
+  // Completed go to Jamaica.
+  // Removed go to Disneyland.
+  // Added go to Disney World.
 </script>
 </body>
 </html>
