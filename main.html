@@ -10,19 +10,17 @@
 <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
 <script>
-  var todos = new Backbone.Collection();
+  // pick() extracts a set of attributes from a model
+  var Todo = Backbone.Model.extend({
+    defaults: {
+      title: '',
+      completed: false
+    }
+  });
 
-  todos.add([
-    { title: 'go to Belgium.', completed: false },
-    { title: 'go to China.', completed: false },
-    { title: 'go to Austria.', completed: true }
-  ]);
-
-  // create groups of completed and incomplete models
-  var byCompleted = todos.groupBy('completed');
-  var completed = new Backbone.Collection(byCompleted[true]);
-  console.log(completed.pluck('title'));
-  // logs: ["go to Austria."]
+  var todo = new Todo({title: 'go to Austria.'});
+  console.log(todo.pick('title'));
+  // logs {title: "go to Austria"}
 </script>
 </body>
 </html>
