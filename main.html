@@ -11,31 +11,32 @@
 <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
 <script>
   // Your code goes here
-  var Todo = Backbone.Model.extend({
-  	defaults: {
-  		title: '',
-  		completed: false
-  	}
-  });
+  // Define an object with two counters
+  var TodoCounter = { counterA: 0, counterB: 0 };
+  // Mix in Backbone events
+  _.extend(TodoCounter, Backbone.Events);
 
-  var myTodo = new Todo();
-  myTodo.set({ title: 'Buy some cookies', completed: true });
+  // Increment counterA, triggering an event
+  var incrA = function() {
+    TodoCounter.counterA += 1;
+    TodoCounter.trigger('event');
+  };
 
-  myTodo.on({
-  	'change:title' : titleChanged,
-  	'change:completed' : stateChanged
-  });
-
-  function titleChanged() {
-  	console.log('The title was changed!');
+  // Increment counterB
+  var incrB = function() {
+    TodoCounter.counterB += 1;
   }
 
-  function stateChanged() {
-  	console.log('The state was changed!');
-  }
+  // Use once rather than having to explicitly unbind event listener
+  TodoCounter.once('event', incrA);
+  TodoCounter.once('event', incrB);
 
-  myTodo.set({ title: 'Get the groceries' });
-  // The title was changed!
+  // Trigger the event once again
+  TodoCounter.trigger('event');
+
+  // Check output
+  console.log(TodoCounter.counterA === 1); // true
+  console.log(TodoCounter.counterB === 1); // true
 </script>
 </body>
 </html>
