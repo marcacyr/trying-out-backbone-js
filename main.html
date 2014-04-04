@@ -10,27 +10,14 @@
 <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
 <script>
-  var TodosCollection = new Backbone.Collection();
-
-  // we can listen for reset events
-  TodosCollection.on("reset", function() {
-    console.log("Collection reset.");
-  }); 
-
-  TodosCollection.add([
-    { title: 'go to Jamaica.', completed: false },
-    { title: 'go to China.', completed: false },
-    { title: 'go to Disneyland.', completed: true }
-  ]);
-
-  console.log('Collection size: ' + TodosCollection.length); // Collection size: 3
-
-  TodosCollection.reset([
-    { title: 'go to Cuba.', completed: false }
-  ]);
-  // Above logs 'Collection reset.'
-
-  console.log('Collection size: ' + TodosCollection.length); // Collection size: 1
+  var todo = new Backbone.Model();
+  var todos = new Backbone.Collection([todo])
+  .on('reset', function(todos, options) {
+    console.log(options.previousModels);
+    console.log([todo]);
+    console.log(options.previousModels[0] === todo); //true
+  });
+  todos.reset([]);
 </script>
 </body>
 </html>
