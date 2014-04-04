@@ -10,30 +10,23 @@
 <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
 <script>
-  // Define a model of the type 'Beatle' with a 'job' attribute
-  var Beatle = Backbone.Model.extend({
-    defaults: {
-      job: 'musician'
-    }
+  var todos = new Backbone.Collection();
+
+  todos.add([
+    { title: 'go to Belgium.', completed: false },
+    { title: 'go to China.', completed: false },
+    { title: 'go to Austria.', completed: true }
+  ]);
+
+  // iterate over models in collection
+  todos.forEach(function(model) {
+    console.log(model.get('title'));
   });
 
-  // Create models for each member of the Beatles
-  var john = new Beatle({ firstName: 'John', lastName: 'Lennon' });
-  var paul = new Beatle({ firstName: 'Paul', lastName: 'McCartney' });
-  var george = new Beatle({ firstName: 'George', lastName: 'Harrison' });
-  var ringo = new Beatle({ firstName: 'Ringo', lastName: 'Starr' });
-
-  // Create a colleciton using our models
-  var theBeatles = new Backbone.Collection([john, paul, george, ringo]);
-
-  // Create a separate model for Pete Best
-  var pete = new Beatle({ firstName: 'Pete', lastName: 'Best' });
-
-  // Update the collection
-  theBeatles.set([john, paul, george, pete]);
-
-  // Fires a 'remove' event for Ringo, and an 'add' event for Pete
-  // Updates any of John, Paul, and George's attirbutes that may have changed.
+  // Above logs:
+  // go to Belgium.
+  // go to China.
+  // go to Austria.
 </script>
 </body>
 </html>
