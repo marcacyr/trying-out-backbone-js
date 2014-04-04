@@ -10,7 +10,7 @@
 <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
 <script>
-  // omit() extracts all atrributes from a model except those listed
+  // keys() and values() get lists of attribute names and values
   var Todo = Backbone.Model.extend({
     defaults: {
       title: '',
@@ -19,8 +19,11 @@
   });
 
   var todo = new Todo({title: 'go to Austria.'});
-  console.log(todo.omit('title'));
-  // logs {completed: false}
+  console.log(todo.keys());
+  // logs ["title", "completed"]
+
+  console.log(todo.values());
+  // logs: ["go to Austria.", false]
 </script>
 </body>
 </html>
