@@ -10,15 +10,21 @@
 <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
 <script>
-  var collection = new Backbone.Collection();
+  var Todo = Backbone.Model.extend({
+    defaults: {
+      title: '',
+      completed: false
+    }
+  });
 
-  collection
-    .add({ name: 'John', age: 23 })
-    .add({ name: 'Harry', age: 33 })
-    .add({ name: 'Steve', age: 41 });
+  var TodosCollection = Backbone.Collection.extend({
+    model: Todo,
+    url: '/todos'
+  });
 
-  var names = collection.pluck('name');
-  console.log(names);
+  var todos = new TodosCollection();
+  todos.fetch(); // sends HTTP GET to /todos
+  // right now returns an error that the file is not found
 
 </script>
 </body>
