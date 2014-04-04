@@ -10,19 +10,15 @@
 <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
 <script>
-  // chain()
-  var collection = new Backbone.Collection([
-    { name: 'Tim', age: 5 },
-    { name: 'Ida', age: 26 },
-    { name: 'Rob', age: 55 }
-  ]);
+  var collection = new Backbone.Collection();
 
-  var filteredNames = collection.chain() //start chain, returns wrapper around collection's models
-    .filter(function(item) { return item.get('age') > 10; }) // returns wrapped array excluding Tim
-    .map(function(item) { return item.get('name'); }) // returns wrapped array containing remaining names
-    .value(); // terminates the chain and returns the resulting array
+  collection
+    .add({ name: 'John', age: 23 })
+    .add({ name: 'Harry', age: 33 })
+    .add({ name: 'Steve', age: 41 });
 
-  console.log(filteredNames); // logs: ['Ida', 'Rob']
+  var names = collection.pluck('name');
+  console.log(names);
 
 </script>
 </body>
