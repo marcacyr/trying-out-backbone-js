@@ -18,31 +18,15 @@
     { title: 'go to Austria.', completed: true }
   ]);
 
-  // iterate over models in collection
-  todos.forEach(function(model) {
-    console.log(model.get('title'));
-  });
+  var count = 1;
+  console.log(todos.map(function(model) {
+    return count++ + ". " + model.get('title');
+  }));
 
   // Above logs:
-  // go to Belgium.
-  // go to China.
-  // go to Austria.
-
-  var sortedByAlphabet = todos.sortBy(function(todo) {
-    return todo.get("title").toLowerCase();
-  });
-
-  console.log("- Now sorted: ");
-
-  sortedByAlphabet.forEach(function(model) {
-    console.log(model.get('title'));
-  });
-
-  // Above logs:
-  // - Now sorted:
-  // go to Austria
-  // go to Belgium
-  // Go to China
+  // 1. go to Belgium
+  // 2. go to China
+  // 3. go to Austria
 </script>
 </body>
 </html>
