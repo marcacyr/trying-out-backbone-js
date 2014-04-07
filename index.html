@@ -34,7 +34,7 @@
     <input class="edit" value="<%= title %>">
   </script>
   <script type="text/template" id="stats-template">
-    <span id="todo-count"><strong><%= remaining %></strong><%= remaining === 1 ? 'item' : 'items' %> left</span>
+    <span id="todo-count"><strong><%= remaining %></strong><%= remaining === 1 ? ' item' : ' items' %> left</span>
     <ul id="filters">
       <li>
         <a class="selected" href="#/">All</a>
@@ -50,10 +50,10 @@
     <button id="clear-completed">Clear completed (<%= completed %>)</button>
     <% } %>
   </script>
-  <script src="js/lib/jquery.min.js"></script>
-  <script src="js/lib/underscore-min.js"></script>
-  <script src="js/lib/backbone-min.js"></script>
-  <script src="js/lib/backbone.localStorage.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.1.7/backbone.localStorage-min.js"></script>
   <script src="js/models/todo.js"></script>
   <script src="js/collections/todos.js"></script>
   <script src="js/views/todos.js"></script>
