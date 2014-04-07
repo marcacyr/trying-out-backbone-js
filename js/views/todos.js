@@ -16,7 +16,9 @@ app.TodoView = Backbone.View.extend({
 
 	// The DOM events specific to an item.
 	events: {
+		'click .toggle': 'togglecompleted',
 		'dblclick label': 'edit',
+		'click .destroy': 'clear',
 		'keypress .edit': 'updateOnEnter',
 		'blur .edit': 'close'
 	},
@@ -56,7 +58,7 @@ app.TodoView = Backbone.View.extend({
 	},
 
 	// NEW - Toggle the 'completed' state of the model.
-	toggleCompleted: function() {
+	togglecompleted: function() {
 		this.model.toggle();
 	},
 
